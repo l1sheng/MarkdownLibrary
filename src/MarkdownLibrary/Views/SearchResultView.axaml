@@ -1,0 +1,79 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:MarkdownLibrary.Library.ViewModels"
+             xmlns:models="using:MarkdownLibrary.Library.Models"
+             x:Class="MarkdownLibrary.Views.SearchResultView"
+             x:DataType="vm:SearchResultViewModel">
+    <UserControl.Styles>
+        <Style Selector="Button.hit-card">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        </Style>
+    </UserControl.Styles>
+
+    <Grid RowDefinitions="Auto,*">
+        <StackPanel Spacing="6" Margin="0,0,0,18">
+            <TextBlock Text="{Binding PageTitle}" FontSize="26" FontWeight="Bold" TextWrapping="Wrap" />
+            <TextBlock Text="{Binding StatusText}" Foreground="#6B7280" FontSize="12" />
+        </StackPanel>
+
+        <Border Grid.Row="1"
+                IsVisible="{Binding IsEmpty}"
+                Background="#FFFFFF"
+                BorderBrush="#E5E7EB"
+                BorderThickness="1"
+                CornerRadius="14"
+                Padding="40">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
+                <TextBlock Text="🔍" FontSize="36" HorizontalAlignment="Center" />
+                <TextBlock Text="没有找到相关内容"
+                           FontSize="18"
+                           FontWeight="SemiBold"
+                           HorizontalAlignment="Center" />
+                <TextBlock Text="换个关键词试试，比如作者名或笔记里的一个词。"
+                           Foreground="#6B7280"
+                           TextAlignment="Center" />
+            </StackPanel>
+        </Border>
+
+        <ScrollViewer Grid.Row="1" IsVisible="{Binding !IsEmpty}">
+            <ItemsControl ItemsSource="{Binding Results}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="models:SearchHit">
+                        <Button Classes="hit-card" Click="OnHitClick" Margin="0,0,0,10">
+                            <Border Background="#FFFFFF"
+                                    BorderBrush="#E5E7EB"
+                                    BorderThickness="1"
+                                    CornerRadius="10"
+                                    Padding="18,14">
+                                <StackPanel Spacing="6">
+                                    <StackPanel Orientation="Horizontal" Spacing="8">
+                                        <Border Background="#EFF6FF"
+                                                CornerRadius="4"
+                                                Padding="6,2">
+                                            <TextBlock Text="{Binding KindText}"
+                                                       FontSize="11"
+                                                       Foreground="#2563EB" />
+                                        </Border>
+                                        <TextBlock Text="{Binding BookTitle}"
+                                                   FontSize="14"
+                                                   FontWeight="SemiBold"
+                                                   VerticalAlignment="Center" />
+                                    </StackPanel>
+                                    <TextBlock Text="{Binding Snippet}"
+                                               FontSize="12"
+                                               Foreground="#6B7280"
+                                               TextWrapping="Wrap" />
+                                </StackPanel>
+                            </Border>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

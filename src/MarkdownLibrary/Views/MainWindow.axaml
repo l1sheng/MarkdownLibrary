@@ -1,0 +1,15 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:MarkdownLibrary.Library.ViewModels"
+        x:Class="MarkdownLibrary.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Title="Markdown 图书馆"
+        Width="1180"
+        Height="760"
+        MinWidth="960"
+        MinHeight="640"
+        WindowStartupLocation="CenterScreen"
+        Background="#F5F6F8"
+        FontFamily="Microsoft YaHei UI, Microsoft YaHei, Segoe UI">
+    <ContentControl Content="{Binding Content}" />
+</Window>

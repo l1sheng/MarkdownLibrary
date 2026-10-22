@@ -1,0 +1,57 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:MarkdownLibrary.Library.ViewModels"
+             x:Class="MarkdownLibrary.Views.SettingsView"
+             x:DataType="vm:SettingsViewModel">
+    <ScrollViewer>
+        <StackPanel Spacing="20" MaxWidth="760" HorizontalAlignment="Left">
+            <TextBlock Text="设置" FontSize="28" FontWeight="Bold" />
+
+            <Border Background="#FFFFFF"
+                    BorderBrush="#E5E7EB"
+                    BorderThickness="1"
+                    CornerRadius="12"
+                    Padding="22">
+                <StackPanel Spacing="14">
+                    <TextBlock Text="书库目录" FontWeight="SemiBold" />
+                    <TextBlock Text="所有 Markdown 文件都从这个目录扫描，支持子目录。"
+                               Foreground="#6B7280"
+                               FontSize="12" />
+                    <TextBox Text="{Binding LibraryFolder, Mode=OneWay}"
+                             IsReadOnly="True"
+                             Background="#F9FAFB" />
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <Button Content="选择文件夹"
+                                Command="{Binding ChooseFolderCommand}"
+                                Background="#2563EB"
+                                Foreground="White"
+                                Padding="16,8" />
+                        <Button Content="重新扫描"
+                                Command="{Binding RescanCommand}"
+                                Padding="16,8" />
+                    </StackPanel>
+                    <TextBlock Text="{Binding StatusText}"
+                               Foreground="#2563EB"
+                               FontSize="12"
+                               TextWrapping="Wrap" />
+                </StackPanel>
+            </Border>
+
+            <Border Background="#FFFFFF"
+                    BorderBrush="#E5E7EB"
+                    BorderThickness="1"
+                    CornerRadius="12"
+                    Padding="22">
+                <StackPanel Spacing="6">
+                    <TextBlock Text="关于" FontWeight="SemiBold" />
+                    <TextBlock Text="Markdown 图书馆 · 本地离线阅读器"
+                               Foreground="#6B7280"
+                               FontSize="12" />
+                    <TextBlock Text="Avalonia + MVVM + SQLite，数据只保存在本机。"
+                               Foreground="#9CA3AF"
+                               FontSize="12" />
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

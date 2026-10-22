@@ -1,0 +1,78 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:MarkdownLibrary.Library.ViewModels"
+             x:Class="MarkdownLibrary.Views.NoteEditView"
+             x:DataType="vm:NoteEditViewModel">
+    <UserControl.Styles>
+        <Style Selector="Button.accent">
+            <Setter Property="Background" Value="#2563EB" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Padding" Value="18,9" />
+            <Setter Property="CornerRadius" Value="8" />
+        </Style>
+    </UserControl.Styles>
+
+    <ScrollViewer>
+        <StackPanel Spacing="16" MaxWidth="820" HorizontalAlignment="Stretch">
+            <Button Content="← 返回"
+                    Command="{Binding GoBackCommand}"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Foreground="#2563EB"
+                    Padding="0"
+                    HorizontalAlignment="Left" />
+
+            <StackPanel Spacing="4">
+                <TextBlock Text="{Binding BookTitle}"
+                           FontSize="13"
+                           Foreground="#2563EB" />
+                <TextBlock Text="{Binding PageTitle}"
+                           FontSize="28"
+                           FontWeight="Bold" />
+            </StackPanel>
+
+            <Border Background="#FFFFFF"
+                    BorderBrush="#E5E7EB"
+                    BorderThickness="1"
+                    CornerRadius="12"
+                    Padding="22"
+                    HorizontalAlignment="Stretch">
+                <StackPanel Spacing="14">
+                    <TextBlock Text="原文摘录" FontWeight="SemiBold" FontSize="13" />
+                    <TextBox Text="{Binding Excerpt, Mode=TwoWay}"
+                             AcceptsReturn="True"
+                             TextWrapping="Wrap"
+                             MinHeight="110"
+                             HorizontalAlignment="Stretch"
+                             Watermark="粘贴或输入原文……" />
+
+                    <TextBlock Text="我的想法" FontWeight="SemiBold" FontSize="13" />
+                    <TextBox Text="{Binding Content, Mode=TwoWay}"
+                             AcceptsReturn="True"
+                             TextWrapping="Wrap"
+                             MinHeight="160"
+                             HorizontalAlignment="Stretch"
+                             Watermark="写点自己的想法……" />
+
+                    <TextBlock Text="{Binding StatusText}"
+                               Foreground="#DC2626"
+                               FontSize="12"
+                               TextWrapping="Wrap" />
+
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <Button Content="保存"
+                                Command="{Binding SaveCommand}"
+                                Classes="accent" />
+                        <Button Content="删除"
+                                Command="{Binding DeleteCommand}"
+                                IsVisible="{Binding CanDelete}"
+                                Padding="18,9"
+                                Background="#FEE2E2"
+                                Foreground="#B91C1C"
+                                CornerRadius="8" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

@@ -1,0 +1,34 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:MarkdownLibrary.Library.ViewModels"
+             x:Class="MarkdownLibrary.Views.SearchView"
+             x:DataType="vm:SearchViewModel">
+    <StackPanel Spacing="18" MaxWidth="760" HorizontalAlignment="Left">
+        <TextBlock Text="搜索" FontSize="28" FontWeight="Bold" />
+
+        <Border Background="#FFFFFF"
+                BorderBrush="#E5E7EB"
+                BorderThickness="1"
+                CornerRadius="12"
+                Padding="22">
+            <StackPanel Spacing="12">
+                <TextBox x:Name="KeywordBox"
+                         Text="{Binding Keyword, Mode=TwoWay}"
+                         FontSize="15"
+                         Watermark="输入书名、作者或笔记内容……"
+                         KeyDown="OnKeywordKeyDown" />
+                <Button Content="搜索"
+                        Command="{Binding SearchCommand}"
+                        Background="#2563EB"
+                        Foreground="White"
+                        Padding="20,9"
+                        CornerRadius="8"
+                        HorizontalAlignment="Left" />
+                <TextBlock Text="{Binding Hint}"
+                           Foreground="#6B7280"
+                           FontSize="12"
+                           TextWrapping="Wrap" />
+            </StackPanel>
+        </Border>
+    </StackPanel>
+</UserControl>

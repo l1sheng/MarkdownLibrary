@@ -1,0 +1,110 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:MarkdownLibrary.Library.ViewModels"
+             xmlns:models="using:MarkdownLibrary.Library.Models"
+             x:Class="MarkdownLibrary.Views.StatsView"
+             x:DataType="vm:StatsViewModel">
+    <ScrollViewer>
+        <StackPanel Spacing="20" MaxWidth="920" HorizontalAlignment="Left">
+            <StackPanel Spacing="4">
+                <TextBlock Text="统计" FontSize="28" FontWeight="Bold" />
+                <TextBlock Text="{Binding StatusText}" Foreground="#6B7280" FontSize="12" />
+            </StackPanel>
+
+            <WrapPanel>
+                <Border Background="#FFFFFF"
+                        BorderBrush="#E5E7EB"
+                        BorderThickness="1"
+                        CornerRadius="12"
+                        Padding="22,16"
+                        Margin="0,0,12,12"
+                        MinWidth="160">
+                    <StackPanel Spacing="6">
+                        <TextBlock Text="书籍" Foreground="#9CA3AF" FontSize="11" />
+                        <TextBlock Text="{Binding Overview.BookCount}" FontSize="26" FontWeight="Bold" />
+                    </StackPanel>
+                </Border>
+
+                <Border Background="#FFFFFF"
+                        BorderBrush="#E5E7EB"
+                        BorderThickness="1"
+                        CornerRadius="12"
+                        Padding="22,16"
+                        Margin="0,0,12,12"
+                        MinWidth="160">
+                    <StackPanel Spacing="6">
+                        <TextBlock Text="笔记" Foreground="#9CA3AF" FontSize="11" />
+                        <TextBlock Text="{Binding Overview.NoteCount}" FontSize="26" FontWeight="Bold" />
+                    </StackPanel>
+                </Border>
+
+                <Border Background="#FFFFFF"
+                        BorderBrush="#E5E7EB"
+                        BorderThickness="1"
+                        CornerRadius="12"
+                        Padding="22,16"
+                        Margin="0,0,12,12"
+                        MinWidth="160">
+                    <StackPanel Spacing="6">
+                        <TextBlock Text="累计阅读" Foreground="#9CA3AF" FontSize="11" />
+                        <TextBlock Text="{Binding Overview.TotalHoursText}" FontSize="26" FontWeight="Bold" />
+                    </StackPanel>
+                </Border>
+
+                <Border Background="#FFFFFF"
+                        BorderBrush="#E5E7EB"
+                        BorderThickness="1"
+                        CornerRadius="12"
+                        Padding="22,16"
+                        Margin="0,0,12,12"
+                        MinWidth="160">
+                    <StackPanel Spacing="6">
+                        <TextBlock Text="连续阅读" Foreground="#9CA3AF" FontSize="11" />
+                        <TextBlock Text="{Binding Overview.StreakDays, StringFormat='{}{0} 天'}"
+                                   FontSize="26"
+                                   FontWeight="Bold" />
+                    </StackPanel>
+                </Border>
+            </WrapPanel>
+
+            <Border Background="#FFFFFF"
+                    BorderBrush="#E5E7EB"
+                    BorderThickness="1"
+                    CornerRadius="12"
+                    Padding="22">
+                <StackPanel Spacing="14">
+                    <TextBlock Text="最近 7 天阅读" FontWeight="SemiBold" FontSize="14" />
+                    <ItemsControl ItemsSource="{Binding Overview.LastSevenDays}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal" Spacing="12" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="models:DailyMinutes">
+                                <StackPanel Width="78" Spacing="6">
+                                    <TextBlock Text="{Binding MinutesText}"
+                                               FontSize="10"
+                                               Foreground="#6B7280"
+                                               HorizontalAlignment="Center" />
+                                    <Grid Height="120">
+                                        <Border Height="{Binding BarHeight}"
+                                                Width="30"
+                                                Background="#2563EB"
+                                                CornerRadius="4"
+                                                VerticalAlignment="Bottom"
+                                                HorizontalAlignment="Center" />
+                                    </Grid>
+                                    <TextBlock Text="{Binding DayText}"
+                                               FontSize="11"
+                                               Foreground="#6B7280"
+                                               HorizontalAlignment="Center" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
